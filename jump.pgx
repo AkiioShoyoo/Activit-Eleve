@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
-  <Program name="coucou" access="public">
+  <Program name="jump">
     <Code><![CDATA[begin
   while true
-    movej(coucou1,flange,mNomSpeed)
-    movej(coucou2,flange,mNomSpeed)
+    movej(jump1,flange,mNomSpeed)
+    movej(jump2,flange,mNomSpeed)
     waitEndMove()
   endWhile
 end]]></Code>

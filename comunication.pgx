@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2">
+  <Program name="comunication">
+    <Locals>
+      <Local name="sChoixMode" type="string" xsi:type="array" size="1" />
+      <Local name="sClient" type="string" xsi:type="array" size="1" />
+    </Locals>
+    <Code><![CDATA[begin
+  // clear the buffer
+  clearBuffer(io:tcp_server)
+  sClient="Connexion reussie"
+  io:tcp_server=sClient
+
+  putln("Un client est connecté")
+  
+  while(isKeyPressed(255)==false)
+    // write
+    sClient="Attente de consigne"
+    io:tcp_server=sClient
+    
+    // read
+    sChoixMode=io:tcp_server
+    putln("Mode choisi: "+sChoixMode)
+    
+    switch sChoixMode
+      //Mode coucou
+      case "1"
+        //on supprime les tâches en cours
+        if taskStatus("jump") != -1
+          taskKill("jump")
+        endIf
+        if taskStatus("pick&place") != -1
+          taskKill("pick&place")
+        endIf
+        
+        delay(0.5)
+        
+        putln("Lancement du mode coucou")
+        taskCreate "coucou", 10, coucou()
+      break
+      //Mode jump
+      case "2"
+        if taskStatus("coucou") != -1
+          taskKill("coucou")
+        endIf
+        if taskStatus("pick&place") != -1
+          taskKill("pick&place")
+        endIf
+        
+        delay(0.5)
+        
+        putln("Lancement du mode jump")
+        taskCreate "jump", 10, jump()
+      break
+      //Mode pick & place
+      case "3"
+        if taskStatus("coucou") != -1
+          taskKill("coucou")
+        endIf
+        if taskStatus("jump") != -1
+          taskKill("jump")
+        endIf
+        
+        delay(0.5)
+        
+        putln("Lancement du mode pick and place")
+        taskCreate "pick&place", 10, PickAndPlace()
+      break
+      
+      default
+        putln(sChoixMode)
+      break
+            
+    endSwitch
+  endWhile
+end]]></Code>
+  </Program>
+</Programs>

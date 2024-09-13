@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Programs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.staubli.com/robotics/VAL3/Program/2" >
+  <Program name="check" access="private" >
+    <Code><![CDATA[begin
+  while taskStatus("comunication")!=-1
+    if taskStatus("comunication")>1
+      // try to clear the buffer and resume
+      clearBuffer(io:tcp_client)
+      taskKill("comunication")
+      wait(taskStatus("comunication")==-1)
+      // create the task again from the beginning
+      taskCreate "comunication",10,comunication()
+    endIf
+    delay(0)
+  endWhile
+end]]></Code>
+  </Program>
+</Programs>

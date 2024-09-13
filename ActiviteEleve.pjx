@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://www.staubli.com/robotics/VAL3/Project/3">
+  <Parameters version="s7.11" stackSize="5000" millimeterUnit="true" />
+  <Programs>
+    <Program file="check.pgx" />
+    <Program file="comunication.pgx" />
+    <Program file="coucou.pgx" />
+    <Program file="jump.pgx" />
+    <Program file="PickAndPlace.pgx" />
+    <Program file="start.pgx" />
+    <Program file="stop.pgx" />
+  </Programs>
+  <Database>
+    <Data file="ActiviteEleve.dtx" />
+  </Database>
+  <Libraries>
+    <Library alias="io" path="Disk://io/io.pjx" />
+  </Libraries>
+</Project>
